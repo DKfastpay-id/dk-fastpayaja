@@ -1,0 +1,2250 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DK Fastpay - Jual Pulsa, E-Wallet & Top Up Game</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4a90e2;
+            --secondary: #3a7bd5;
+            --accent: #64b5f6;
+            --light: #ffffff;
+            --dark: #2c3e50;
+            --success: #4cd964;
+            --danger: #ff3b30;
+            --warning: #ff9500;
+            --gray: #f5f7fa;
+            --text: #34495e;
+            --bg-gradient: linear-gradient(135deg, #4a90e2, #3a7bd5);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--gray);
+            color: var(--text);
+            line-height: 1.6;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%234a90e2" opacity="0.05"/><path d="M0 0L100 100M100 0L0 100" stroke="%233a7bd5" stroke-width="1" opacity="0.05"/></svg>');
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: var(--bg-gradient);
+            color: var(--light);
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+        }
+        
+        /* Desktop Navigation */
+        .desktop-nav {
+            display: flex;
+            list-style: none;
+        }
+        
+        .desktop-nav li {
+            margin-left: 1.5rem;
+        }
+        
+        .desktop-nav a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            padding: 8px 12px;
+            border-radius: 5px;
+        }
+        
+        .desktop-nav a:hover,
+        .desktop-nav a.active {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .auth-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            padding: 8px 16px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--light);
+            color: var(--light);
+        }
+        
+        .btn-primary {
+            background: var(--accent);
+            color: var(--light);
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Hamburger Button */
+        .hamburger-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--light);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        
+        .hamburger-btn:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .hamburger-btn:focus {
+            outline: 2px solid var(--light);
+            outline-offset: 2px;
+        }
+        
+        /* Mobile Navigation */
+        .mobile-nav-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 998;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.2s ease;
+        }
+        
+        .mobile-nav-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .mobile-nav-panel {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 320px;
+            max-width: 90vw;
+            height: 100vh;
+            background: var(--dark);
+            z-index: 999;
+            transition: transform 0.2s ease;
+            transform: translateX(100%);
+            display: flex;
+            flex-direction: column;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .mobile-nav-panel.active {
+            transform: translateX(0);
+            right: 0;
+        }
+        
+        .mobile-nav-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .mobile-nav-close {
+            background: none;
+            border: none;
+            color: var(--light);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        
+        .mobile-nav-close:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .mobile-nav-close:focus {
+            outline: 2px solid var(--light);
+            outline-offset: 2px;
+        }
+        
+        .mobile-nav-links {
+            list-style: none;
+            flex: 1;
+            overflow-y: auto;
+            padding: 1rem;
+        }
+        
+        .mobile-nav-links li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .mobile-nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-size: 1.1rem;
+            display: block;
+            padding: 12px 16px;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        
+        .mobile-nav-links a:hover,
+        .mobile-nav-links a:focus,
+        .mobile-nav-links a.active {
+            background: rgba(255, 255, 255, 0.1);
+            outline: none;
+        }
+        
+        .mobile-auth-buttons {
+            padding: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        
+        .mobile-auth-buttons .btn {
+            width: 100%;
+        }
+        
+        /* Body scroll lock */
+        body.mobile-nav-open {
+            overflow: hidden;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: var(--bg-gradient);
+            color: var(--light);
+            padding: 4rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="%23ffffff" opacity="0.1"/></svg>');
+            background-size: 50px 50px;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            position: relative;
+        }
+        
+        /* AI Features Section */
+        .ai-features {
+            padding: 3rem 0;
+            background: var(--light);
+        }
+        
+        .ai-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .ai-card {
+            background: var(--light);
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            border-left: 4px solid var(--primary);
+            transition: transform 0.3s;
+        }
+        
+        .ai-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .ai-card i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .ai-card h3 {
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+        
+        .ai-badge {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            margin-left: 8px;
+        }
+        
+        /* Products Section */
+        .products {
+            padding: 4rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--secondary);
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--primary);
+        }
+        
+        .product-categories {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .category-btn {
+            padding: 10px 20px;
+            background: var(--light);
+            border: 1px solid #ddd;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+            color: var(--text);
+        }
+        
+        .category-btn.active, .category-btn:hover {
+            background: var(--primary);
+            color: var(--light);
+            border-color: var(--primary);
+        }
+        
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+        }
+        
+        .product-card {
+            background: var(--light);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .product-image {
+            height: 150px;
+            background: var(--bg-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--light);
+            font-size: 3rem;
+        }
+        
+        .product-info {
+            padding: 1.5rem;
+        }
+        
+        .product-name {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+        
+        .product-price {
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .buy-btn {
+            width: 100%;
+            padding: 10px;
+            background: var(--primary);
+            color: var(--light);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+        
+        .buy-btn:hover {
+            background: var(--secondary);
+        }
+        
+        .buy-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .product-stock {
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+        
+        .stock-available {
+            color: var(--success);
+        }
+        
+        .stock-limited {
+            color: var(--warning);
+        }
+        
+        .stock-out {
+            color: var(--danger);
+        }
+        
+        /* Category Sections */
+        .category-section {
+            margin-bottom: 4rem;
+            display: none;
+        }
+        
+        .category-section.active {
+            display: block;
+        }
+        
+        /* Game Items Styling */
+        .game-item {
+            text-align: center;
+            padding: 10px;
+        }
+        
+        .diamond-count {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 10px 0;
+        }
+        
+        .game-bonus {
+            font-size: 0.8rem;
+            color: var(--success);
+            margin-bottom: 5px;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: var(--light);
+            padding: 3rem 0 1.5rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-column h3 {
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--primary);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 1rem;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--light);
+            transition: background 0.3s;
+        }
+        
+        .social-links a:hover {
+            background: var(--primary);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            overflow-y: auto;
+            padding: 20px;
+        }
+        
+        .modal-content {
+            background: var(--light);
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #777;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .payment-method {
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .payment-method:hover, .payment-method.active {
+            border-color: var(--primary);
+            background: rgba(74, 144, 226, 0.1);
+        }
+        
+        .payment-method i {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+        
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            background: var(--success);
+            color: white;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            z-index: 1001;
+            display: none;
+            max-width: 300px;
+        }
+        
+        /* Auth Modal */
+        .auth-modal {
+            display: none;
+        }
+        
+        .auth-tabs {
+            display: flex;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .auth-tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+        }
+        
+        .auth-tab.active {
+            border-bottom-color: var(--primary);
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        .auth-form {
+            display: none;
+        }
+        
+        .auth-form.active {
+            display: block;
+        }
+        
+        /* Payment Pages */
+        .payment-page {
+            display: none;
+            text-align: center;
+        }
+        
+        .payment-page.active {
+            display: block;
+        }
+        
+        .payment-instructions {
+            background: var(--gray);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: left;
+        }
+        
+        .payment-instructions ol, .payment-instructions ul {
+            padding-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .payment-instructions li {
+            margin-bottom: 10px;
+        }
+        
+        .qris-code {
+            width: 250px;
+            height: 250px;
+            background: #f0f0f0;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            border: 1px dashed #ccc;
+            overflow: hidden;
+        }
+        
+        .qris-code img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .payment-details {
+            background: var(--light);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: left;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .payment-details h3 {
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+        
+        .payment-details p {
+            margin-bottom: 10px;
+        }
+        
+        .payment-actions {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 25px;
+        }
+        
+        /* AI Chatbot */
+        .ai-chatbot {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 350px;
+            background: var(--light);
+            border-radius: 10px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            display: none;
+        }
+        
+        .chatbot-header {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            border-radius: 10px 10px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .chatbot-body {
+            padding: 15px;
+            height: 300px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .chatbot-message {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 10px;
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+        
+        .bot-message {
+            background: var(--gray);
+            align-self: flex-start;
+        }
+        
+        .user-message {
+            background: var(--primary);
+            color: white;
+            align-self: flex-end;
+            margin-left: auto;
+        }
+        
+        .chatbot-input {
+            display: flex;
+            padding: 15px;
+            border-top: 1px solid #eee;
+        }
+        
+        .chatbot-input input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+        
+        .chatbot-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            z-index: 1001;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1023px) {
+            .desktop-nav {
+                display: none;
+            }
+            
+            .auth-buttons {
+                display: none;
+            }
+            
+            .hamburger-btn {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .product-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+            
+            .payment-methods {
+                grid-template-columns: 1fr;
+            }
+            
+            .ai-chatbot {
+                width: 90%;
+                right: 5%;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .mobile-nav-overlay,
+            .mobile-nav-panel {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Notification -->
+    <div class="notification" id="notification"></div>
+
+    <!-- Mobile Navigation Overlay -->
+    <div class="mobile-nav-overlay" id="mobileNavOverlay" tabindex="-1"></div>
+
+    <!-- Mobile Navigation Panel -->
+    <div class="mobile-nav-panel" id="mobileNavPanel" tabindex="-1" role="dialog" aria-modal="true" aria-label="Menu navigasi">
+        <div class="mobile-nav-header">
+            <div class="logo">
+                <i class="fas fa-bolt"></i>
+                DK Fastpay
+            </div>
+            <button class="mobile-nav-close" id="mobileNavClose" aria-label="Tutup menu">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <ul class="mobile-nav-links">
+            <li><a href="#" class="active" data-section="home">Beranda</a></li>
+            <li><a href="#pulsa" data-section="pulsa">Pulsa & Data</a></li>
+            <li><a href="#ewallet" data-section="ewallet">E-Wallet</a></li>
+            <li><a href="#token" data-section="token">Token Listrik</a></li>
+            <li><a href="#game" data-section="game">Top Up Game</a></li>
+            <li><a href="#history" data-section="history">Riwayat Saya</a></li>
+            <li><a href="#status" data-section="status">Status Transaksi</a></li>
+            <li><a href="#report" data-section="report">Lapor Masalah</a></li>
+        </ul>
+        
+        <div class="mobile-auth-buttons">
+            <button class="btn btn-outline" id="mobileLoginBtn">Masuk</button>
+            <button class="btn btn-primary" id="mobileRegisterBtn">Daftar</button>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <i class="fas fa-bolt"></i>
+                    DK Fastpay
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <ul class="desktop-nav">
+                    <li><a href="#" class="active" data-section="home">Beranda</a></li>
+                    <li><a href="#pulsa" data-section="pulsa">Pulsa & Data</a></li>
+                    <li><a href="#ewallet" data-section="ewallet">E-Wallet</a></li>
+                    <li><a href="#token" data-section="token">Token Listrik</a></li>
+                    <li><a href="#game" data-section="game">Top Up Game</a></li>
+                    <li><a href="#history" data-section="history">Riwayat Saya</a></li>
+                    <li><a href="#status" data-section="status">Status Transaksi</a></li>
+                    <li><a href="#report" data-section="report">Lapor Masalah</a></li>
+                </ul>
+                
+                <!-- Desktop Auth Buttons -->
+                <div class="auth-buttons">
+                    <button class="btn btn-outline" id="loginBtn">Masuk</button>
+                    <button class="btn btn-primary" id="registerBtn">Daftar</button>
+                </div>
+                
+                <!-- Hamburger Button -->
+                <button class="hamburger-btn" id="hamburgerBtn" aria-expanded="false" aria-controls="mobileNavPanel" aria-label="Buka menu navigasi">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>DK Fastpay - Top Up Game & Produk Digital</h1>
+            <p>Top up diamond ML, UC PUBG, FF, pulsa, e-wallet, dan token listrik dengan harga terbaik. Proses cepat dan aman 24/7.</p>
+            <button class="btn btn-primary" style="padding: 12px 30px; font-size: 1.1rem;" id="heroBuyBtn">Beli Sekarang</button>
+        </div>
+    </section>
+
+    <!-- AI Features Section -->
+    <section class="ai-features">
+        <div class="container">
+            <h2 class="section-title">Teknologi AI Kami</h2>
+            <div class="ai-cards">
+                <div class="ai-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>AI Payment Verification <span class="ai-badge">LIVE</span></h3>
+                    <p>Sistem AI cerdas yang memverifikasi pembayaran secara real-time dengan akurasi 99.2%</p>
+                </div>
+                <div class="ai-card">
+                    <i class="fas fa-brain"></i>
+                    <h3>Fraud Detection <span class="ai-badge">AI</span></h3>
+                    <p>Deteksi transaksi mencurigakan menggunakan machine learning pattern recognition</p>
+                </div>
+                <div class="ai-card">
+                    <i class="fas fa-robot"></i>
+                    <h3>Smart Assistant <span class="ai-badge">AI</span></h3>
+                    <p>Chatbot AI yang memahami pertanyaan natural dan memberikan solusi instan</p>
+                </div>
+                <div class="ai-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Behavior Analysis <span class="ai-badge">ML</span></h3>
+                    <p>Analisis pola transaksi untuk rekomendasi produk yang personalized</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products" id="produk">
+        <div class="container">
+            <h2 class="section-title">Produk Digital Kami</h2>
+            
+            <div class="product-categories">
+                <button class="category-btn active" data-category="all">Semua</button>
+                <button class="category-btn" data-category="pulsa">Pulsa & Data</button>
+                <button class="category-btn" data-category="ewallet">E-Wallet</button>
+                <button class="category-btn" data-category="token">Token Listrik</button>
+                <button class="category-btn" data-category="game">Top Up Game</button>
+            </div>
+            
+            <!-- Pulsa & Data Section -->
+            <div class="category-section active" id="pulsa-section">
+                <h3 class="section-title" style="font-size: 1.5rem; margin-bottom: 1.5rem;">Pulsa & Paket Data</h3>
+                <div class="product-grid">
+                    <!-- Products will be loaded by JavaScript -->
+                </div>
+            </div>
+            
+            <!-- E-Wallet Section -->
+            <div class="category-section" id="ewallet-section">
+                <h3 class="section-title" style="font-size: 1.5rem; margin-bottom: 1.5rem;">E-Wallet & Saldo Digital</h3>
+                <div class="product-grid">
+                    <!-- Products will be loaded by JavaScript -->
+                </div>
+            </div>
+            
+            <!-- Token Listrik Section -->
+            <div class="category-section" id="token-section">
+                <h3 class="section-title" style="font-size: 1.5rem; margin-bottom: 1.5rem;">Token Listrik</h3>
+                <div class="product-grid">
+                    <!-- Products will be loaded by JavaScript -->
+                </div>
+            </div>
+            
+            <!-- Game Section -->
+            <div class="category-section" id="game-section">
+                <h3 class="section-title" style="font-size: 1.5rem; margin-bottom: 1.5rem;">Top Up Game</h3>
+                <div class="product-grid">
+                    <!-- Products will be loaded by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>DK Fastpay</h3>
+                    <p>Toko digital terpercaya dengan teknologi AI untuk keamanan transaksi maksimal.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Kontak</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-phone"></i> WhatsApp: 085704647753</li>
+                        <li><i class="fas fa-envelope"></i> Email: radikaramadhan05@gmail.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Bojonegoro, Indonesia</li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Pembayaran</h3>
+                    <ul class="footer-links">
+                        <li>QRIS</li>
+                        <li>DANA: 085704647753</li>
+                        <li>OVO: 0895397359806</li>
+                        <li>GoPay/ShopeePay: 0895397359806</li>
+                        <li>BNI: 1888724061</li>
+                        <li>SeaBank: 901980614022</li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Bantuan</h3>
+                    <ul class="footer-links">
+                        <li><a href="#" data-section="history">Riwayat Saya</a></li>
+                        <li><a href="#" data-section="status">Cek Status</a></li>
+                        <li><a href="#" data-section="report">Lapor Masalah</a></li>
+                        <li><a href="#">Cara Pembelian</a></li>
+                        <li><a href="#">Metode Pembayaran</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 DK Fastpay. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Purchase Modal -->
+    <div class="modal" id="purchaseModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Beli Produk</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <form id="purchaseForm">
+                <div class="form-group">
+                    <label for="productName">Produk</label>
+                    <input type="text" id="productName" class="form-control" readonly>
+                </div>
+                
+                <div class="form-group">
+                    <label for="productPrice">Harga</label>
+                    <input type="text" id="productPrice" class="form-control" readonly>
+                </div>
+                
+                <div class="form-group">
+                    <label for="customerNumber">Nomor Tujuan / ID Game</label>
+                    <input type="text" id="customerNumber" class="form-control" placeholder="Contoh: 081234567890 atau 123456789 (ID Game)" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Pilih Metode Pembayaran</label>
+                    <div class="payment-methods">
+                        <div class="payment-method" data-method="qris">
+                            <i class="fas fa-qrcode"></i>
+                            <p>QRIS</p>
+                        </div>
+                        <div class="payment-method" data-method="dana">
+                            <i class="fas fa-wallet"></i>
+                            <p>DANA</p>
+                        </div>
+                        <div class="payment-method" data-method="ovo">
+                            <i class="fas fa-money-bill-wave"></i>
+                            <p>OVO</p>
+                        </div>
+                        <div class="payment-method" data-method="gopay">
+                            <i class="fas fa-credit-card"></i>
+                            <p>GoPay</p>
+                        </div>
+                        <div class="payment-method" data-method="shopeepay">
+                            <i class="fas fa-shopping-bag"></i>
+                            <p>ShopeePay</p>
+                        </div>
+                        <div class="payment-method" data-method="bank">
+                            <i class="fas fa-university"></i>
+                            <p>Transfer Bank</p>
+                        </div>
+                    </div>
+                    <input type="hidden" id="paymentMethod" required>
+                </div>
+                
+                <div class="payment-actions">
+                    <button type="button" class="btn btn-outline" id="cancelPurchase">Batal</button>
+                    <button type="submit" class="btn btn-primary">Lanjutkan Pembayaran</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Payment Modal -->
+    <div class="modal" id="paymentModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="paymentTitle">Instruksi Pembayaran</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            
+            <!-- QRIS Payment Page -->
+            <div class="payment-page active" id="qrisPage">
+                <div class="payment-details">
+                    <h3>Detail Pembayaran</h3>
+                    <p><strong>Produk:</strong> <span id="paymentProduct"></span></p>
+                    <p><strong>Nomor Tujuan:</strong> <span id="paymentNumber"></span></p>
+                    <p><strong>Total Pembayaran:</strong> <span id="paymentTotal"></span></p>
+                    <p><strong>ID Transaksi:</strong> <span id="paymentId"></span></p>
+                </div>
+                
+                <div class="qris-code">
+                    <img src="https://i.ibb.co/WNxMhwVX/Whats-App-Image-2025-01-11-at-11-45-02-d7d87ed1.jpg" alt="QR Code DK Fastpay">
+                </div>
+                
+                <div class="payment-instructions">
+                    <h4>Cara Pembayaran dengan QRIS:</h4>
+                    <ol>
+                        <li>Buka aplikasi e-wallet atau mobile banking Anda</li>
+                        <li>Pilih fitur scan QRIS</li>
+                        <li>Arahkan kamera ke QR code di atas</li>
+                        <li>Pastikan nominal pembayaran sesuai</li>
+                        <li>Konfirmasi pembayaran</li>
+                        <li>Tunggu proses verifikasi otomatis (1-3 menit)</li>
+                    </ol>
+                </div>
+                
+                <div class="payment-actions">
+                    <button type="button" class="btn btn-outline" id="backToPurchase">Kembali</button>
+                    <button type="button" class="btn btn-primary" id="confirmPayment">Saya Sudah Bayar</button>
+                </div>
+            </div>
+            
+            <!-- DANA Payment Page -->
+            <div class="payment-page" id="danaPage">
+                <div class="payment-details">
+                    <h3>Transfer ke DANA</h3>
+                    <p><strong>Nomor DANA:</strong> 085704647753</p>
+                    <p><strong>Atas Nama:</strong> DK Fastpay</p>
+                    <p><strong>Total Pembayaran:</strong> <span id="danaTotal"></span></p>
+                    <p><strong>ID Transaksi:</strong> <span id="danaId"></span></p>
+                </div>
+                
+                <div class="payment-instructions">
+                    <h4>Cara Pembayaran dengan DANA:</h4>
+                    <ol>
+                        <li>Buka aplikasi DANA</li>
+                        <li>Pilih "Kirim" atau "Transfer"</li>
+                        <li>Masukkan nomor <strong>085704647753</strong></li>
+                        <li>Masukkan nominal <strong><span id="danaAmount"></span></strong></li>
+                        <li>Tambahkan catatan: <strong id="danaNote"></strong></li>
+                        <li>Konfirmasi transfer</li>
+                    </ol>
+                </div>
+                
+                <div class="payment-actions">
+                    <button type="button" class="btn btn-outline" id="backToPurchaseDana">Kembali</button>
+                    <button type="button" class="btn btn-primary" id="confirmDanaPayment">Saya Sudah Transfer</button>
+                </div>
+            </div>
+
+            <!-- OVO Payment Page -->
+            <div class="payment-page" id="ovoPage">
+                <div class="payment-details">
+                    <h3>Transfer ke OVO</h3>
+                    <p><strong>Nomor OVO:</strong> 0895397359806</p>
+                    <p><strong>Atas Nama:</strong> DK Fastpay</p>
+                    <p><strong>Total Pembayaran:</strong> <span id="ovoTotal"></span></p>
+                    <p><strong>ID Transaksi:</strong> <span id="ovoId"></span></p>
+                </div>
+                
+                <div class="payment-instructions">
+                    <h4>Cara Pembayaran dengan OVO:</h4>
+                    <ol>
+                        <li>Buka aplikasi OVO</li>
+                        <li>Pilih "Transfer"</li>
+                        <li>Masukkan nomor <strong>0895397359806</strong></li>
+                        <li>Masukkan nominal <strong><span id="ovoAmount"></span></strong></li>
+                        <li>Tambahkan catatan: <strong id="ovoNote"></strong></li>
+                        <li>Konfirmasi transfer</li>
+                    </ol>
+                </div>
+                
+                <div class="payment-actions">
+                    <button type="button" class="btn btn-outline" id="backToPurchaseOvo">Kembali</button>
+                    <button type="button" class="btn btn-primary" id="confirmOvoPayment">Saya Sudah Transfer</button>
+                </div>
+            </div>
+
+            <!-- GoPay Payment Page -->
+            <div class="payment-page" id="gopayPage">
+                <div class="payment-details">
+                    <h3>Transfer ke GoPay</h3>
+                    <p><strong>Nomor GoPay:</strong> 0895397359806</p>
+                    <p><strong>Atas Nama:</strong> DK Fastpay</p>
+                    <p><strong>Total Pembayaran:</strong> <span id="gopayTotal"></span></p>
+                    <p><strong>ID Transaksi:</strong> <span id="gopayId"></span></p>
+                </div>
+                
+                <div class="payment-instructions">
+                    <h4>Cara Pembayaran dengan GoPay:</h4>
+                    <ol>
+                        <li>Buka aplikasi Gojek</li>
+                        <li>Pilih "GoPay" lalu "Transfer"</li>
+                        <li>Masukkan nomor <strong>0895397359806</strong></li>
+                        <li>Masukkan nominal <strong><span id="gopayAmount"></span></strong></li>
+                        <li>Tambahkan catatan: <strong id="gopayNote"></strong></li>
+                        <li>Konfirmasi transfer</li>
+                    </ol>
+                </div>
+                
+                <div class="payment-actions">
+                    <button type="button" class="btn btn-outline" id="backToPurchaseGopay">Kembali</button>
+                    <button type="button" class="btn btn-primary" id="confirmGopayPayment">Saya Sudah Transfer</button>
+                </div>
+            </div>
+
+            <!-- ShopeePay Payment Page -->
+            <div class="payment-page" id="shopeepayPage">
+                <div class="payment-details">
+                    <h3>Transfer ke ShopeePay</h3>
+                    <p><strong>Nomor ShopeePay:</strong> 0895397359806</p>
+                    <p><strong>Atas Nama:</strong> DK Fastpay</p>
+                    <p><strong>Total Pembayaran:</strong> <span id="shopeepayTotal"></span></p>
+                    <p><strong>ID Transaksi:</strong> <span id="shopeepayId"></span></p>
+                </div>
+                
+                <div class="payment-instructions">
+                    <h4>Cara Pembayaran dengan ShopeePay:</h4>
+                    <ol>
+                        <li>Buka aplikasi Shopee</li>
+                        <li>Pilih "ShopeePay" lalu "Transfer"</li>
+                        <li>Masukkan nomor <strong>0895397359806</strong></li>
+                        <li>Masukkan nominal <strong><span id="shopeepayAmount"></span></strong></li>
+                        <li>Tambahkan catatan: <strong id="shopeepayNote"></strong></li>
+                        <li>Konfirmasi transfer</li>
+                    </ol>
+                </div>
+                
+                <div class="payment-actions">
+                    <button type="button" class="btn btn-outline" id="backToPurchaseShopeepay">Kembali</button>
+                    <button type="button" class="btn btn-primary" id="confirmShopeepayPayment">Saya Sudah Transfer</button>
+                </div>
+            </div>
+
+            <!-- Bank Transfer Page -->
+            <div class="payment-page" id="bankPage">
+                <div class="payment-details">
+                    <h3>Transfer Bank</h3>
+                    <p><strong>Bank BNI:</strong> 1888724061</p>
+                    <p><strong>Atas Nama:</strong> DK Fastpay</p>
+                    <p><strong>Bank SeaBank:</strong> 901980614022</p>
+                    <p><strong>Atas Nama:</strong> DK Fastpay</p>
+                    <p><strong>Total Pembayaran:</strong> <span id="bankTotal"></span></p>
+                    <p><strong>ID Transaksi:</strong> <span id="bankId"></span></p>
+                </div>
+                
+                <div class="payment-instructions">
+                    <h4>Cara Pembayaran Transfer Bank:</h4>
+                    <ol>
+                        <li>Buka aplikasi mobile banking atau ATM</li>
+                        <li>Pilih transfer ke rekening</li>
+                        <li>Masukkan nomor rekening BNI atau SeaBank</li>
+                        <li>Masukkan nominal <strong><span id="bankAmount"></span></strong></li>
+                        <li>Tambahkan catatan: <strong id="bankNote"></strong></li>
+                        <li>Konfirmasi transfer</li>
+                    </ol>
+                </div>
+                
+                <div class="payment-actions">
+                    <button type="button" class="btn btn-outline" id="backToPurchaseBank">Kembali</button>
+                    <button type="button" class="btn btn-primary" id="confirmBankPayment">Saya Sudah Transfer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Auth Modal -->
+    <div class="modal auth-modal" id="authModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="authModalTitle">Masuk ke Akun</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="auth-tabs">
+                <div class="auth-tab active" data-tab="login">Masuk</div>
+                <div class="auth-tab" data-tab="register">Daftar</div>
+            </div>
+            
+            <form id="loginForm" class="auth-form active">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" class="form-control" placeholder="Email Anda" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" class="form-control" placeholder="Password Anda" required>
+                </div>
+                
+                <button type="submit" class="buy-btn">Masuk</button>
+            </form>
+            
+            <form id="registerForm" class="auth-form">
+                <div class="form-group">
+                    <label for="registerName">Nama Lengkap</label>
+                    <input type="text" id="registerName" class="form-control" placeholder="Nama Lengkap" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="registerEmail">Email</label>
+                    <input type="email" id="registerEmail" class="form-control" placeholder="Email Anda" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="registerPhone">Nomor Telepon</label>
+                    <input type="tel" id="registerPhone" class="form-control" placeholder="Nomor Telepon" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="registerPassword">Password</label>
+                    <input type="password" id="registerPassword" class="form-control" placeholder="Password" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="registerConfirmPassword">Konfirmasi Password</label>
+                    <input type="password" id="registerConfirmPassword" class="form-control" placeholder="Konfirmasi Password" required>
+                </div>
+                
+                <button type="submit" class="buy-btn">Daftar</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- AI Chatbot -->
+    <div class="ai-chatbot" id="aiChatbot">
+        <div class="chatbot-header">
+            <h3>AI Assistant DK Fastpay</h3>
+            <button class="close-modal">&times;</button>
+        </div>
+        <div class="chatbot-body">
+            <!-- Chat messages will appear here -->
+        </div>
+        <div class="chatbot-input">
+            <input type="text" placeholder="Tanya tentang produk atau pembayaran...">
+            <button class="btn btn-primary"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <div class="chatbot-toggle" id="chatbotToggle">
+        <i class="fas fa-robot"></i>
+    </div>
+
+    <script>
+        // ==================== MOBILE NAVIGATION ====================
+        class MobileNavigation {
+            constructor() {
+                this.isOpen = false;
+                this.hamburgerBtn = document.getElementById('hamburgerBtn');
+                this.mobileNavPanel = document.getElementById('mobileNavPanel');
+                this.mobileNavOverlay = document.getElementById('mobileNavOverlay');
+                this.mobileNavClose = document.getElementById('mobileNavClose');
+                this.mobileNavLinks = document.querySelectorAll('.mobile-nav-links a');
+                this.firstFocusableElement = this.mobileNavClose;
+                this.lastFocusableElement = document.getElementById('mobileRegisterBtn');
+                
+                this.init();
+            }
+            
+            init() {
+                this.hamburgerBtn.addEventListener('click', () => this.open());
+                this.mobileNavOverlay.addEventListener('click', () => this.close());
+                this.mobileNavClose.addEventListener('click', () => this.close());
+                
+                // Keyboard navigation
+                document.addEventListener('keydown', (e) => this.handleKeydown(e));
+                
+                // Focus trap
+                this.mobileNavPanel.addEventListener('keydown', (e) => this.trapFocus(e));
+                
+                // Close on link click
+                this.mobileNavLinks.forEach(link => {
+                    link.addEventListener('click', () => this.close());
+                });
+            }
+            
+            open() {
+                this.isOpen = true;
+                this.hamburgerBtn.setAttribute('aria-expanded', 'true');
+                this.mobileNavOverlay.classList.add('active');
+                this.mobileNavPanel.classList.add('active');
+                document.body.classList.add('mobile-nav-open');
+                
+                // Set focus to first element
+                setTimeout(() => {
+                    this.firstFocusableElement.focus();
+                }, 200);
+            }
+            
+            close() {
+                this.isOpen = false;
+                this.hamburgerBtn.setAttribute('aria-expanded', 'false');
+                this.mobileNavOverlay.classList.remove('active');
+                this.mobileNavPanel.classList.remove('active');
+                document.body.classList.remove('mobile-nav-open');
+                
+                // Return focus to hamburger button
+                this.hamburgerBtn.focus();
+            }
+            
+            handleKeydown(e) {
+                if (e.key === 'Escape' && this.isOpen) {
+                    this.close();
+                }
+            }
+            
+            trapFocus(e) {
+                if (e.key === 'Tab') {
+                    if (e.shiftKey) {
+                        // Shift + Tab
+                        if (document.activeElement === this.firstFocusableElement) {
+                            e.preventDefault();
+                            this.lastFocusableElement.focus();
+                        }
+                    } else {
+                        // Tab
+                        if (document.activeElement === this.lastFocusableElement) {
+                            e.preventDefault();
+                            this.firstFocusableElement.focus();
+                        }
+                    }
+                }
+            }
+        }
+        
+        // Initialize mobile navigation
+        const mobileNav = new MobileNavigation();
+        
+        // ==================== PRODUCTS DATA ====================
+        // Generate products with kelipatan 5000 from 5,000 to 200,000
+        const generateProducts = () => {
+            const pulsaProducts = [];
+            const ewalletProducts = [];
+            
+            for (let i = 5000; i <= 200000; i += 5000) {
+                pulsaProducts.push({
+                    id: i,
+                    name: "Pulsa All Operator",
+                    price: i,
+                    stock: "available",
+                    category: "pulsa"
+                });
+                
+                ewalletProducts.push({
+                    id: i + 200000,
+                    name: "Top Up DANA",
+                    price: i,
+                    stock: "available",
+                    category: "ewallet"
+                });
+                
+                ewalletProducts.push({
+                    id: i + 400000,
+                    name: "Top Up OVO",
+                    price: i,
+                    stock: "available",
+                    category: "ewallet"
+                });
+                
+                ewalletProducts.push({
+                    id: i + 600000,
+                    name: "Top Up GoPay",
+                    price: i,
+                    stock: "available",
+                    category: "ewallet"
+                });
+                
+                ewalletProducts.push({
+                    id: i + 800000,
+                    name: "Top Up ShopeePay",
+                    price: i,
+                    stock: "available",
+                    category: "ewallet"
+                });
+            }
+            
+            return { pulsa: pulsaProducts, ewallet: ewalletProducts };
+        };
+        
+        const generatedProducts = generateProducts();
+        
+        const productsData = {
+            "pulsa": generatedProducts.pulsa,
+            "ewallet": generatedProducts.ewallet,
+            "token": [
+                { id: 27001, name: "Token Listrik 20.000", price: 20000, stock: "available", category: "token" },
+                { id: 27002, name: "Token Listrik 50.000", price: 50000, stock: "available", category: "token" },
+                { id: 27003, name: "Token Listrik 100.000", price: 100000, stock: "available", category: "token" },
+                { id: 27004, name: "Token Listrik 200.000", price: 200000, stock: "available", category: "token" }
+            ],
+            "game": [
+                { id: 31001, name: "Mobile Legends", item: "86 Diamonds", price: 20000, stock: "available", category: "game", bonus: "+4 Bonus" },
+                { id: 31002, name: "Mobile Legends", item: "172 Diamonds", price: 40000, stock: "available", category: "game", bonus: "+12 Bonus" },
+                { id: 31003, name: "Mobile Legends", item: "257 Diamonds", price: 60000, stock: "available", category: "game", bonus: "+17 Bonus" },
+                { id: 31004, name: "Mobile Legends", item: "344 Diamonds", price: 80000, stock: "available", category: "game", bonus: "+26 Bonus" },
+                { id: 31005, name: "Mobile Legends", item: "429 Diamonds", price: 100000, stock: "available", category: "game", bonus: "+31 Bonus" },
+                { id: 31006, name: "Mobile Legends", item: "514 Diamonds", price: 120000, stock: "available", category: "game", bonus: "+36 Bonus" },
+                { id: 31007, name: "Mobile Legends", item: "706 Diamonds", price: 150000, stock: "available", category: "game", bonus: "+44 Bonus" },
+                { id: 31008, name: "Free Fire", item: "70 Diamonds", price: 10000, stock: "available", category: "game", bonus: "+5 Bonus" },
+                { id: 31009, name: "Free Fire", item: "140 Diamonds", price: 20000, stock: "available", category: "game", bonus: "+10 Bonus" },
+                { id: 31010, name: "Free Fire", item: "210 Diamonds", price: 30000, stock: "available", category: "game", bonus: "+15 Bonus" },
+                { id: 31011, name: "Free Fire", item: "355 Diamonds", price: 50000, stock: "available", category: "game", bonus: "+25 Bonus" },
+                { id: 31012, name: "Free Fire", item: "720 Diamonds", price: 100000, stock: "available", category: "game", bonus: "+50 Bonus" },
+                { id: 31013, name: "Free Fire", item: "1450 Diamonds", price: 200000, stock: "available", category: "game", bonus: "+100 Bonus" },
+                { id: 31014, name: "PUBG Mobile", item: "60 UC", price: 10000, stock: "available", category: "game", bonus: "+5 Bonus" },
+                { id: 31015, name: "PUBG Mobile", item: "325 UC", price: 50000, stock: "available", category: "game", bonus: "+25 Bonus" },
+                { id: 31016, name: "PUBG Mobile", item: "660 UC", price: 100000, stock: "available", category: "game", bonus: "+50 Bonus" },
+                { id: 31017, name: "PUBG Mobile", item: "1650 UC", price: 250000, stock: "available", category: "game", bonus: "+125 Bonus" },
+                { id: 31018, name: "PUBG Mobile", item: "3420 UC", price: 500000, stock: "available", category: "game", bonus: "+250 Bonus" }
+            ]
+        };
+
+        // ==================== CORE FUNCTIONALITY ====================
+        let currentUser = JSON.parse(localStorage.getItem('currentUser')) || null;
+        let users = JSON.parse(localStorage.getItem('users')) || [];
+        let currentTransaction = null;
+
+        function loadProducts() {
+            for (const category in productsData) {
+                const productGrid = document.getElementById(`${category}-section`).querySelector('.product-grid');
+                productGrid.innerHTML = '';
+                
+                productsData[category].forEach(product => {
+                    const productCard = document.createElement('div');
+                    productCard.className = 'product-card';
+                    productCard.setAttribute('data-category', category);
+                    
+                    const finalPrice = calculateFinalPrice(product.price);
+                    
+                    if (category === 'game') {
+                        productCard.innerHTML = `
+                            <div class="product-image">
+                                <i class="fas fa-gamepad"></i>
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-name">${product.name}</h3>
+                                <div class="game-item">
+                                    <div class="diamond-count">${product.item}</div>
+                                    ${product.bonus ? `<div class="game-bonus">${product.bonus}</div>` : ''}
+                                </div>
+                                <p class="product-price">Rp ${finalPrice.toLocaleString('id-ID')}</p>
+                                <p class="product-stock ${getStockClass(product.stock)}">${getStockText(product.stock)}</p>
+                                <button class="buy-btn" data-product="${product.name} - ${product.item}" data-price="${finalPrice}" data-original-price="${product.price}" ${product.stock === 'out' ? 'disabled' : ''}>
+                                    ${product.stock === 'out' ? 'Stok Habis' : 'Beli Sekarang'}
+                                </button>
+                            </div>
+                        `;
+                    } else {
+                        productCard.innerHTML = `
+                            <div class="product-image">
+                                <i class="fas ${getProductIcon(category)}"></i>
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-name">${product.name}</h3>
+                                <p class="product-price">Rp ${finalPrice.toLocaleString('id-ID')}</p>
+                                <p class="product-stock ${getStockClass(product.stock)}">${getStockText(product.stock)}</p>
+                                <button class="buy-btn" data-product="${product.name}" data-price="${finalPrice}" data-original-price="${product.price}" ${product.stock === 'out' ? 'disabled' : ''}>
+                                    ${product.stock === 'out' ? 'Stok Habis' : 'Beli Sekarang'}
+                                </button>
+                            </div>
+                        `;
+                    }
+                    
+                    productGrid.appendChild(productCard);
+                });
+            }
+            
+            // Re-attach event listeners to new buy buttons
+            document.querySelectorAll('.buy-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    if (this.disabled) {
+                        showNotification('Maaf, produk ini sedang habis', 'danger');
+                        return;
+                    }
+                    
+                    if (!currentUser) {
+                        showNotification('Silakan login terlebih dahulu', 'warning');
+                        document.getElementById('authModal').style.display = 'flex';
+                        return;
+                    }
+                    
+                    const product = this.getAttribute('data-product');
+                    const price = this.getAttribute('data-price');
+                    const originalPrice = this.getAttribute('data-original-price');
+                    
+                    document.getElementById('productName').value = product;
+                    document.getElementById('productPrice').value = 'Rp ' + parseInt(price).toLocaleString('id-ID');
+                    
+                    // Store current product data
+                    currentTransaction = {
+                        product,
+                        price: parseInt(price),
+                        originalPrice: parseInt(originalPrice)
+                    };
+                    
+                    document.getElementById('purchaseModal').style.display = 'flex';
+                });
+            });
+        }
+        
+        function calculateFinalPrice(price) {
+            let adminFee = 0;
+            
+            if (price <= 50000) {
+                adminFee = 2000;
+            } else if (price <= 200000) {
+                adminFee = 3000;
+            } else {
+                adminFee = 4000;
+            }
+            
+            return price + adminFee;
+        }
+        
+        function getProductIcon(category) {
+            switch(category) {
+                case 'pulsa': return 'fa-mobile-alt';
+                case 'ewallet': return 'fa-wallet';
+                case 'token': return 'fa-bolt';
+                case 'game': return 'fa-gamepad';
+                default: return 'fa-shopping-cart';
+            }
+        }
+        
+        function getStockClass(stock) {
+            switch(stock) {
+                case 'available': return 'stock-available';
+                case 'limited': return 'stock-limited';
+                case 'out': return 'stock-out';
+                default: return '';
+            }
+        }
+        
+        function getStockText(stock) {
+            switch(stock) {
+                case 'available': return 'Stok: Tersedia';
+                case 'limited': return 'Stok: Terbatas';
+                case 'out': return 'Stok: Habis';
+                default: return '';
+            }
+        }
+        
+        function showNotification(message, type = 'success') {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.style.display = 'block';
+            notification.style.background = 
+                type === 'success' ? 'var(--success)' : 
+                type === 'warning' ? 'var(--warning)' : 'var(--danger)';
+            
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 5000);
+        }
+        
+        function updateAuthButtons() {
+            if (currentUser) {
+                document.getElementById('loginBtn').textContent = currentUser.name;
+                document.getElementById('registerBtn').textContent = 'Keluar';
+                document.getElementById('mobileLoginBtn').textContent = currentUser.name;
+                document.getElementById('mobileRegisterBtn').textContent = 'Keluar';
+            } else {
+                document.getElementById('loginBtn').textContent = 'Masuk';
+                document.getElementById('registerBtn').textContent = 'Daftar';
+                document.getElementById('mobileLoginBtn').textContent = 'Masuk';
+                document.getElementById('mobileRegisterBtn').textContent = 'Daftar';
+            }
+        }
+        
+        // ==================== ENHANCED CHATBOT AI ====================
+        class EnhancedChatbot {
+            constructor() {
+                this.isOpen = false;
+                this.chatbot = document.getElementById('aiChatbot');
+                this.chatbotToggle = document.getElementById('chatbotToggle');
+                this.chatbotBody = document.querySelector('.chatbot-body');
+                this.chatbotInput = document.querySelector('.chatbot-input input');
+                this.chatbotSend = document.querySelector('.chatbot-input button');
+                
+                this.init();
+            }
+            
+            init() {
+                this.chatbotToggle.addEventListener('click', () => this.toggle());
+                this.chatbotSend.addEventListener('click', () => this.sendMessage());
+                this.chatbotInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') this.sendMessage();
+                });
+                
+                // Add initial bot message
+                this.addBotMessage("Halo! Saya adalah asisten AI DK Fastpay. Saya bisa membantu Anda dengan: pembelian pulsa, e-wallet, token listrik, atau top up game. Ada yang bisa saya bantu?");
+            }
+            
+            toggle() {
+                this.isOpen = !this.isOpen;
+                this.chatbot.style.display = this.isOpen ? 'block' : 'none';
+                
+                if (this.isOpen) {
+                    this.chatbotInput.focus();
+                }
+            }
+            
+            sendMessage() {
+                const message = this.chatbotInput.value.trim();
+                if (!message) return;
+                
+                this.addUserMessage(message);
+                this.chatbotInput.value = '';
+                
+                // Process user message and generate response
+                setTimeout(() => {
+                    this.processMessage(message);
+                }, 1000);
+            }
+            
+            addUserMessage(message) {
+                const messageElement = document.createElement('div');
+                messageElement.className = 'chatbot-message user-message';
+                messageElement.textContent = message;
+                this.chatbotBody.appendChild(messageElement);
+                this.scrollToBottom();
+            }
+            
+            addBotMessage(message) {
+                const messageElement = document.createElement('div');
+                messageElement.className = 'chatbot-message bot-message';
+                messageElement.textContent = message;
+                this.chatbotBody.appendChild(messageElement);
+                this.scrollToBottom();
+            }
+            
+            scrollToBottom() {
+                this.chatbotBody.scrollTop = this.chatbotBody.scrollHeight;
+            }
+            
+            processMessage(message) {
+                const lowerMessage = message.toLowerCase();
+                let response = "";
+                
+                // Enhanced Indonesian language processing with more natural responses
+                if (lowerMessage.includes('halo') || lowerMessage.includes('hai') || lowerMessage.includes('hi') || 
+                    lowerMessage.includes('helo') || lowerMessage.includes('hallo') || lowerMessage.includes('selamat')) {
+                    const greetings = [
+                        "Halo! Senang bertemu dengan Anda. Ada yang bisa saya bantu hari ini?",
+                        "Hai! Selamat datang di DK Fastpay. Saya siap membantu Anda.",
+                        "Halo! Terima kasih sudah menghubungi DK Fastpay. Apa yang bisa saya bantu?",
+                        "Hai! Senang Anda datang. Ada pertanyaan tentang produk atau layanan kami?"
+                    ];
+                    response = greetings[Math.floor(Math.random() * greetings.length)];
+                } else if (lowerMessage.includes('terima kasih') || lowerMessage.includes('makasih') || lowerMessage.includes('thanks')) {
+                    response = "Sama-sama! Senang bisa membantu. Jika ada pertanyaan lain, jangan ragu untuk bertanya ya! 😊";
+                } else if (lowerMessage.includes('pulsa') || lowerMessage.includes('data') || lowerMessage.includes('paket internet')) {
+                    response = "Untuk pembelian pulsa atau paket data, silakan pilih kategori 'Pulsa & Data' di halaman utama. Kami menyediakan berbagai nominal dari Rp 5.000 hingga Rp 200.000 dengan kelipatan 5.000. Ada nominal tertentu yang Anda butuhkan?";
+                } else if (lowerMessage.includes('e-wallet') || lowerMessage.includes('dana') || lowerMessage.includes('ovo') || lowerMessage.includes('gopay') || lowerMessage.includes('shopeepay')) {
+                    response = "Untuk top up e-wallet seperti DANA, OVO, GoPay, atau ShopeePay, silakan pilih kategori 'E-Wallet & Saldo Digital' di halaman utama. Kami menyediakan semua nominal dari Rp 5.000 hingga Rp 200.000. E-wallet mana yang ingin Anda top up?";
+                } else if (lowerMessage.includes('token') || lowerMessage.includes('listrik') || lowerMessage.includes('pln')) {
+                    response = "Untuk pembelian token listrik PLN, silakan pilih kategori 'Token Listrik' di halaman utama. Kami menyediakan token dengan nominal 20rb, 50rb, 100rb, dan 200rb. Pastikan nomor meteran yang Anda masukkan sudah benar ya!";
+                } else if (lowerMessage.includes('game') || lowerMessage.includes('diamond') || lowerMessage.includes('uc') || lowerMessage.includes('ml') || lowerMessage.includes('free fire') || lowerMessage.includes('pubg')) {
+                    response = "Untuk top up game seperti Mobile Legends, Free Fire, atau PUBG Mobile, silakan pilih kategori 'Top Up Game' di halaman utama. Kami menyediakan berbagai paket diamond dan UC dengan bonus menarik. Game apa yang ingin Anda top up?";
+                } else if (lowerMessage.includes('cara') || lowerMessage.includes('bagaimana') || lowerMessage.includes('proses') || lowerMessage.includes('langkah')) {
+                    response = "Berikut adalah langkah-langkah lengkap pembelian di DK Fastpay:\n\n1. Pilih produk yang ingin dibeli\n2. Klik tombol 'Beli Sekarang'\n3. Masukkan nomor tujuan/ID game\n4. Pilih metode pembayaran (QRIS, DANA, OVO, dll)\n5. Ikuti instruksi pembayaran\n6. Klik 'Saya Sudah Bayar'\n7. Tunggu verifikasi admin (1-5 menit)\n8. Produk akan dikirim/diproses\n\nAda langkah tertentu yang ingin Anda ketahui lebih detail?";
+                } else if (lowerMessage.includes('status') || lowerMessage.includes('cek') || lowerMessage.includes('transaksi') || lowerMessage.includes('pembayaran')) {
+                    response = "Untuk mengecek status transaksi, Anda bisa:\n\n1. Klik menu 'Status Transaksi' di navigasi\n2. Masukkan ID transaksi Anda\n3. Atau hubungi admin via WhatsApp di 085704647753\n\nID transaksi biasanya dimulai dengan 'TRX' diikuti angka. Apakah Anda memiliki ID transaksi yang ingin dicek?";
+                } else if (lowerMessage.includes('bantuan') || lowerMessage.includes('tolong') || lowerMessage.includes('masalah') || lowerMessage.includes('error')) {
+                    response = "Jika mengalami kendala atau masalah, Anda bisa:\n\n1. Hubungi admin via WhatsApp: 085704647753\n2. Gunakan menu 'Lapor Masalah' di navigasi\n3. Atau jelaskan masalah Anda di sini, saya akan coba bantu\n\nApa masalah yang Anda alami?";
+                } else if (lowerMessage.includes('harga') || lowerMessage.includes('biaya') || lowerMessage.includes('admin') || lowerMessage.includes('fee')) {
+                    response = "Untuk informasi harga dan biaya admin:\n\n- Pulsa & Data: Harga sesuai nominal + biaya admin\n- E-Wallet: Harga sesuai nominal + biaya admin\n- Token Listrik: Harga sesuai nominal\n- Game: Harga sesuai jumlah diamond/UC + bonus\n\nBiaya admin bervariasi tergantung nominal:\n- ≤ Rp 50.000: Rp 2.000\n- ≤ Rp 200.000: Rp 3.000\n- > Rp 200.000: Rp 4.000\n\nProduk apa yang ingin Anda ketahui harganya?";
+                } else if (lowerMessage.includes('jam') || lowerMessage.includes('buka') || lowerMessage.includes('tutup') || lowerMessage.includes('operasional')) {
+                    response = "DK Fastpay buka 24 jam non-stop! Anda bisa melakukan transaksi kapan saja, termasuk tengah malam dan akhir pekan. Layanan kami tersedia setiap hari tanpa libur.";
+                } else if (lowerMessage.includes('admin') || lowerMessage.includes('cs') || lowerMessage.includes('customer service')) {
+                    response = "Admin DK Fastpay bisa dihubungi via WhatsApp di 085704647753. Biasanya merespons dalam beberapa menit. Jika butuh bantuan cepat, silakan hubungi langsung ya!";
+                } else if (lowerMessage.includes('promo') || lowerMessage.includes('diskon') || lowerMessage.includes('bonus') || lowerMessage.includes('hadiah')) {
+                    response = "Untuk informasi promo terbaru, silakan follow media sosial DK Fastpay atau tanyakan langsung ke admin di WhatsApp 085704647753. Kami sering memberikan bonus dan promo spesial untuk pelanggan setia!";
+                } else {
+                    // More natural responses for general conversation
+                    const generalResponses = [
+                        "Maaf, saya belum sepenuhnya memahami pertanyaan Anda. Bisa dijelaskan lebih detail?",
+                        "Wah, pertanyaan menarik! Tapi saya khusus membantu dengan produk DK Fastpay. Ada yang bisa saya bantu terkait pulsa, e-wallet, token listrik, atau top up game?",
+                        "Saya adalah asisten khusus DK Fastpay. Saya bisa membantu Anda dengan pembelian produk digital. Ada produk tertentu yang ingin Anda tanyakan?",
+                        "Maaf, saya hanya bisa membantu hal-hal terkait DK Fastpay. Untuk pertanyaan lain, silakan hubungi admin di 085704647753 ya!",
+                        "Hmm, sepertinya saya belum paham maksud Anda. Saya bisa membantu dengan: pembelian pulsa, e-wallet, token listrik, atau top up game. Mana yang Anda butuhkan?"
+                    ];
+                    response = generalResponses[Math.floor(Math.random() * generalResponses.length)];
+                }
+                
+                this.addBotMessage(response);
+            }
+        }
+
+        // ==================== PAYMENT SYSTEM ====================
+        function showPaymentPage(method) {
+            // Hide all payment pages
+            document.querySelectorAll('.payment-page').forEach(page => page.classList.remove('active'));
+            
+            // Show selected payment page
+            document.getElementById(`${method}Page`).classList.add('active');
+            
+            // Update payment details
+            const transactionId = 'TRX' + Date.now();
+            
+            document.getElementById('paymentProduct').textContent = currentTransaction.product;
+            document.getElementById('paymentNumber').textContent = document.getElementById('customerNumber').value;
+            document.getElementById('paymentTotal').textContent = 'Rp ' + currentTransaction.price.toLocaleString('id-ID');
+            document.getElementById('paymentId').textContent = transactionId;
+            
+            // Update other payment pages
+            document.getElementById('danaTotal').textContent = 'Rp ' + currentTransaction.price.toLocaleString('id-ID');
+            document.getElementById('danaId').textContent = transactionId;
+            document.getElementById('danaAmount').textContent = 'Rp ' + currentTransaction.price.toLocaleString('id-ID');
+            document.getElementById('danaNote').textContent = transactionId;
+            
+            document.getElementById('ovoTotal').textContent = 'Rp ' + currentTransaction.price.toLocaleString('id-ID');
+            document.getElementById('ovoId').textContent = transactionId;
+            document.getElementById('ovoAmount').textContent = 'Rp ' + currentTransaction.price.toLocaleString('id-ID');
+            document.getElementById('ovoNote').textContent = transactionId;
+            
+            document.getElementById('gopayTotal').textContent = 'Rp ' + currentTransaction.price.toLocaleString('id-ID');
+            document.getElementById('gopayId').textContent = transactionId;
+            document.getElementById('gopayAmount').textContent = 'Rp ' + currentTransaction.price.toLocaleString('id-ID');
+            document.getElementById('gopayNote').textContent = transactionId;
+            
+            document.getElementById('shopeepayTotal').textContent = 'Rp ' + currentTransaction.price.toLocaleString('id-ID');
+            document.getElementById('shopeepayId').textContent = transactionId;
+            document.getElementById('shopeepayAmount').textContent = 'Rp ' + currentTransaction.price.toLocaleString('id-ID');
+            document.getElementById('shopeepayNote').textContent = transactionId;
+            
+            document.getElementById('bankTotal').textContent = 'Rp ' + currentTransaction.price.toLocaleString('id-ID');
+            document.getElementById('bankId').textContent = transactionId;
+            document.getElementById('bankAmount').textContent = 'Rp ' + currentTransaction.price.toLocaleString('id-ID');
+            document.getElementById('bankNote').textContent = transactionId;
+            
+            // Store transaction ID in current transaction
+            currentTransaction.id = transactionId;
+            currentTransaction.customerNumber = document.getElementById('customerNumber').value;
+            currentTransaction.paymentMethod = method;
+            currentTransaction.status = 'Pending';
+            currentTransaction.date = new Date().toISOString();
+            currentTransaction.userId = currentUser.id;
+        }
+        
+        function simulateAIVerification() {
+            // Save transaction
+            const transactions = JSON.parse(localStorage.getItem('transactions')) || [];
+            transactions.push(currentTransaction);
+            localStorage.setItem('transactions', JSON.stringify(transactions));
+            
+            showNotification(`Pembayaran berhasil! ID Transaksi: ${currentTransaction.id}`, 'success');
+            
+            setTimeout(() => {
+                document.getElementById('paymentModal').style.display = 'none';
+                document.getElementById('purchaseModal').style.display = 'none';
+            }, 3000);
+        }
+        
+        // ==================== NAVIGATION ====================
+        function showSection(section) {
+            // Remove active class from all nav links
+            document.querySelectorAll('.desktop-nav a, .mobile-nav-links a').forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // Add active class to clicked link
+            document.querySelectorAll(`[data-section="${section}"]`).forEach(link => {
+                link.classList.add('active');
+            });
+            
+            console.log(`Navigating to: ${section}`);
+        }
+        
+        // Add event listeners to navigation links
+        document.querySelectorAll('.desktop-nav a, .mobile-nav-links a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const section = this.getAttribute('data-section');
+                showSection(section);
+            });
+        });
+        
+        // ==================== CATEGORY FILTERING ====================
+        document.querySelectorAll('.category-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                // Remove active class from all buttons
+                document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
+                
+                // Add active class to clicked button
+                this.classList.add('active');
+                
+                const category = this.getAttribute('data-category');
+                const categorySections = document.querySelectorAll('.category-section');
+                
+                // Show/hide category sections
+                categorySections.forEach(section => {
+                    if (category === 'all') {
+                        section.classList.add('active');
+                    } else {
+                        if (section.id === `${category}-section`) {
+                            section.classList.add('active');
+                        } else {
+                            section.classList.remove('active');
+                        }
+                    }
+                });
+            });
+        });
+        
+        // ==================== AUTH SYSTEM ====================
+        document.getElementById('loginBtn').addEventListener('click', function() {
+            if (currentUser) {
+                showNotification(`Halo, ${currentUser.name}!`, 'success');
+            } else {
+                document.getElementById('authModal').style.display = 'flex';
+            }
+        });
+        
+        document.getElementById('registerBtn').addEventListener('click', function() {
+            if (currentUser) {
+                // Logout
+                currentUser = null;
+                localStorage.removeItem('currentUser');
+                showNotification('Anda telah logout', 'success');
+                updateAuthButtons();
+            } else {
+                document.getElementById('authModal').style.display = 'flex';
+                // Switch to register tab
+                document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+                document.querySelector('[data-tab="register"]').classList.add('active');
+                document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
+                document.getElementById('registerForm').classList.add('active');
+                document.getElementById('authModalTitle').textContent = 'Daftar Akun Baru';
+            }
+        });
+        
+        document.getElementById('mobileLoginBtn').addEventListener('click', function() {
+            mobileNav.close();
+            if (currentUser) {
+                showNotification(`Halo, ${currentUser.name}!`, 'success');
+            } else {
+                document.getElementById('authModal').style.display = 'flex';
+            }
+        });
+        
+        document.getElementById('mobileRegisterBtn').addEventListener('click', function() {
+            mobileNav.close();
+            if (currentUser) {
+                // Logout
+                currentUser = null;
+                localStorage.removeItem('currentUser');
+                showNotification('Anda telah logout', 'success');
+                updateAuthButtons();
+            } else {
+                document.getElementById('authModal').style.display = 'flex';
+                // Switch to register tab
+                document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+                document.querySelector('[data-tab="register"]').classList.add('active');
+                document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
+                document.getElementById('registerForm').classList.add('active');
+                document.getElementById('authModalTitle').textContent = 'Daftar Akun Baru';
+            }
+        });
+        
+        // Auth forms
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            const user = users.find(u => u.email === email && u.password === password);
+            
+            if (user) {
+                currentUser = user;
+                localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                showNotification('Login berhasil!', 'success');
+                document.getElementById('authModal').style.display = 'none';
+                updateAuthButtons();
+                this.reset();
+            } else {
+                showNotification('Email atau password salah', 'danger');
+            }
+        });
+        
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('registerName').value;
+            const email = document.getElementById('registerEmail').value;
+            const phone = document.getElementById('registerPhone').value;
+            const password = document.getElementById('registerPassword').value;
+            const confirmPassword = document.getElementById('registerConfirmPassword').value;
+            
+            if (password !== confirmPassword) {
+                showNotification('Password tidak cocok', 'danger');
+                return;
+            }
+            
+            if (users.find(u => u.email === email)) {
+                showNotification('Email sudah terdaftar', 'danger');
+                return;
+            }
+            
+            const newUser = {
+                id: Date.now(),
+                name,
+                email,
+                phone,
+                password
+            };
+            
+            users.push(newUser);
+            localStorage.setItem('users', JSON.stringify(users));
+            
+            showNotification('Pendaftaran berhasil! Silakan login', 'success');
+            
+            // Switch to login tab
+            document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+            document.querySelector('[data-tab="login"]').classList.add('active');
+            document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
+            document.getElementById('loginForm').classList.add('active');
+            document.getElementById('authModalTitle').textContent = 'Masuk ke Akun';
+            this.reset();
+        });
+        
+        // Auth tabs
+        document.querySelectorAll('.auth-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                const tabName = this.getAttribute('data-tab');
+                
+                document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                
+                document.querySelectorAll('.auth-form').forEach(form => {
+                    form.classList.remove('active');
+                    if (form.id === `${tabName}Form`) {
+                        form.classList.add('active');
+                    }
+                });
+                
+                document.getElementById('authModalTitle').textContent = 
+                    tabName === 'login' ? 'Masuk ke Akun' : 'Daftar Akun Baru';
+            });
+        });
+        
+        // ==================== PURCHASE SYSTEM ====================
+        document.getElementById('purchaseForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const customerNumber = document.getElementById('customerNumber').value;
+            const paymentMethodValue = document.getElementById('paymentMethod').value;
+            
+            if (!customerNumber || !paymentMethodValue) {
+                showNotification('Harap lengkapi semua field!', 'danger');
+                return;
+            }
+            
+            // Show payment modal
+            showPaymentPage(paymentMethodValue);
+            document.getElementById('purchaseModal').style.display = 'none';
+            document.getElementById('paymentModal').style.display = 'flex';
+        });
+        
+        // Payment method selection
+        document.querySelectorAll('.payment-method').forEach(method => {
+            method.addEventListener('click', function() {
+                document.querySelectorAll('.payment-method').forEach(m => m.classList.remove('active'));
+                this.classList.add('active');
+                
+                const methodValue = this.getAttribute('data-method');
+                document.getElementById('paymentMethod').value = methodValue;
+            });
+        });
+        
+        // Payment confirmation buttons
+        document.getElementById('confirmPayment').addEventListener('click', simulateAIVerification);
+        document.getElementById('confirmDanaPayment').addEventListener('click', simulateAIVerification);
+        document.getElementById('confirmOvoPayment').addEventListener('click', simulateAIVerification);
+        document.getElementById('confirmGopayPayment').addEventListener('click', simulateAIVerification);
+        document.getElementById('confirmShopeepayPayment').addEventListener('click', simulateAIVerification);
+        document.getElementById('confirmBankPayment').addEventListener('click', simulateAIVerification);
+        
+        // Back buttons
+        document.getElementById('backToPurchase').addEventListener('click', function() {
+            document.getElementById('paymentModal').style.display = 'none';
+            document.getElementById('purchaseModal').style.display = 'flex';
+        });
+        
+        document.getElementById('backToPurchaseDana').addEventListener('click', function() {
+            document.getElementById('paymentModal').style.display = 'none';
+            document.getElementById('purchaseModal').style.display = 'flex';
+        });
+        
+        document.getElementById('backToPurchaseOvo').addEventListener('click', function() {
+            document.getElementById('paymentModal').style.display = 'none';
+            document.getElementById('purchaseModal').style.display = 'flex';
+        });
+        
+        document.getElementById('backToPurchaseGopay').addEventListener('click', function() {
+            document.getElementById('paymentModal').style.display = 'none';
+            document.getElementById('purchaseModal').style.display = 'flex';
+        });
+        
+        document.getElementById('backToPurchaseShopeepay').addEventListener('click', function() {
+            document.getElementById('paymentModal').style.display = 'none';
+            document.getElementById('purchaseModal').style.display = 'flex';
+        });
+        
+        document.getElementById('backToPurchaseBank').addEventListener('click', function() {
+            document.getElementById('paymentModal').style.display = 'none';
+            document.getElementById('purchaseModal').style.display = 'flex';
+        });
+        
+        // Modal close functionality
+        document.querySelectorAll('.close-modal').forEach(button => {
+            button.addEventListener('click', function() {
+                document.getElementById('purchaseModal').style.display = 'none';
+                document.getElementById('authModal').style.display = 'none';
+                document.getElementById('paymentModal').style.display = 'none';
+            });
+        });
+        
+        document.getElementById('cancelPurchase').addEventListener('click', function() {
+            document.getElementById('purchaseModal').style.display = 'none';
+        });
+        
+        window.addEventListener('click', function(event) {
+            if (event.target === document.getElementById('purchaseModal')) {
+                document.getElementById('purchaseModal').style.display = 'none';
+            }
+            if (event.target === document.getElementById('authModal')) {
+                document.getElementById('authModal').style.display = 'none';
+            }
+            if (event.target === document.getElementById('paymentModal')) {
+                document.getElementById('paymentModal').style.display = 'none';
+            }
+        });
+        
+        // Hero buy button
+        document.getElementById('heroBuyBtn').addEventListener('click', function() {
+            showSection('pulsa');
+        });
+        
+        // ==================== INITIALIZATION ====================
+        document.addEventListener('DOMContentLoaded', function() {
+            loadProducts();
+            updateAuthButtons();
+            
+            // Initialize enhanced chatbot
+            const chatbot = new EnhancedChatbot();
+            
+            console.log('DK Fastpay Enhanced System initialized successfully');
+        });
+    </script>
+</body>
+</html>
